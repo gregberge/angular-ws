@@ -1,0 +1,26 @@
+{
+  "name": "angular-ws",
+  "version": "0.0.0",
+  "description": "WebSocket service for Angular.js",
+  "homepage": "https://github.com/neoziro/angular-ws",
+  "authors": [
+    "Greg Bergé <neoziro@gmail.com>"
+  ],
+  "main": "angular-ws.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "package.json",
+    "test.js",
+    "Gruntfile.js"
+  ],
+  "dependencies": {
+    "angular": "~1.2.23"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.23",
+    "jquery": "~2.1.1"
+  }
+}
