@@ -98,10 +98,13 @@ describe('WebSocket', function () {
     });
 
     describe('#close', function () {
-      it('should send and receive message', function () {
+      it('should close the socket', function (done) {
         ws.connect({url: 'ws://echo.websocket.org'});
         ws.close();
-        expect(ws.getReadyState()).to.equal(3);
+        ws.on('close', function () {
+          expect(ws.getReadyState()).to.equal(3);
+          done();
+        });
       });
     });
   });
