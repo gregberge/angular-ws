@@ -1,4 +1,4 @@
-/*! Angular ws v0.0.0 | (c) 2014 Greg Bergé | License MIT */
+/*! Angular ws v1.0.0 | (c) 2014 Greg Bergé | License MIT */
 
 angular
 .module('ws', [])
