@@ -16,10 +16,12 @@ bower install angular-ws
 ```js
 angular.module('app', ['ws'])
 .config(function (wsProvider) {
-  wsProvider.setUrl('url', 'ws://echo.websocket.org');
+  wsProvider.setUrl('ws://echo.websocket.org');
 })
 .controller('WebSocketCtrl', function ($scope, ws) {
-  ws.on('message', function (msg) {
+  ws.connect();
+
+  ws.$on('message', function (msg) {
     // ...
   });
 
@@ -27,22 +29,66 @@ angular.module('app', ['ws'])
 });
 ```
 
-### Interceptors
+### Provider
+
+#### wsProvider.setUrl(url)
+
+Set the url of the WebSocket.
 
 ```js
-angular.module('app', ['ws'])
-.config(function (wsProvider) {
-  wsProvider.interceptors.push('wsInterceptor');
+wsProvider.setUrl('ws://echo.websocket.org');
+```
+
+#### wsProvider.setProtocols(protocols)
+
+Set the protocols used by the WebSocket.
+
+```js
+wsProvider.setProtocols(['protocol']);
+```
+
+### Service
+
+#### ws.connect([config])
+
+Connect the WebSocket, you can provide a custom config.
+
+```js
+ws.connect({
+  url: 'ws://echo.websocket.org',
+  protocols: ['protocol']
 })
-.factory('wsInterceptor', function ($window) {
-  return {
-    request: function (config) {
-      if ($window.sessionStorage.token)
-        config.url = 'ws://echo.websocket.org?token=' + $window.sessionStorage.token;
-      return config;
-    }
-  };
+.then(function () {
+  $log.debug('WebSocket is connected.');
+}, function () {
+  $log.debug('An error occurs during WebSocket connection.');
 });
+```
+
+#### ws.getReadyState()
+
+Get the ready state of the WebSocket.
+
+```js
+ws.getReadyState() // WebSocket.CLOSED, WebSocket.OPEN...
+```
+
+#### ws.on(event, listener)
+
+Listen an event on the WebSocket, the function is already wrapped in `$rootScope.$apply()`.
+
+```js
+ws.on('message', function (event) {
+  $log.info('New message', event.data);
+});
+```
+
+#### ws.close()
+
+Close the connection of the WebSocket.
+
+```js
+ws.close();
 ```
 
 ## License
