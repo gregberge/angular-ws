@@ -19,8 +19,6 @@ angular.module('app', ['ws'])
   wsProvider.setUrl('ws://echo.websocket.org');
 })
 .controller('WebSocketCtrl', function ($scope, ws, $log) {
-  ws.connect();
-
   ws.on('message', function (event) {
     $log.info('New message', event.data);
   });
@@ -53,6 +51,8 @@ wsProvider.setProtocols(['protocol']);
 
 Connect the WebSocket, you can provide a custom config.
 
+Note that if you use `ws.on` or `ws.send` the connection is automatic.
+
 ```js
 ws.connect({
   url: 'ws://echo.websocket.org',
@@ -63,6 +63,16 @@ ws.connect({
 }, function () {
   $log.debug('An error occurs during WebSocket connection.');
 });
+```
+
+#### ws.baseSocket
+
+The base socket object.
+
+```js
+ws.baseSocket.onmessage = function (event) {
+  // event.data ...
+}
 ```
 
 #### ws.getReadyState()
