@@ -18,11 +18,11 @@ angular.module('app', ['ws'])
 .config(function (wsProvider) {
   wsProvider.setUrl('ws://echo.websocket.org');
 })
-.controller('WebSocketCtrl', function ($scope, ws) {
+.controller('WebSocketCtrl', function ($scope, ws, $log) {
   ws.connect();
 
-  ws.$on('message', function (msg) {
-    // ...
+  ws.on('message', function (event) {
+    $log.info('New message', event.data);
   });
 
   ws.send('custom message');
