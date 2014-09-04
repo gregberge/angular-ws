@@ -101,6 +101,10 @@ Close the connection of the WebSocket.
 ws.close();
 ```
 
+## Testing
+
+To be able to test WebSocket in the good way, the module [angular-ws-mock](https://github.com/neoziro/angular-ws-mock) will provide you a transparent mock.
+
 ## License
 
 MIT
