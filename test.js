@@ -57,9 +57,6 @@ describe('WebSocket', function () {
           .then(function (_ws) {
             expect(_ws).to.equal(ws);
             done();
-          })
-          .catch(function (e) {
-            console.log(e);
           });
         });
       });

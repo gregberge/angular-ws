@@ -14,12 +14,6 @@ function wsProvider() {
   this.config = {};
 
   /**
-   * Interceptors.
-   */
-
-  this.interceptors = [];
-
-  /**
    * Expose ws service.
    */
 
