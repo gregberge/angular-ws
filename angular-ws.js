@@ -11,7 +11,9 @@ function wsProvider() {
    * Configuration.
    */
 
-  this.config = {};
+  this.config = {
+    transport: WebSocket
+  };
 
   /**
    * Expose ws service.
@@ -41,11 +43,15 @@ function wsProvider() {
 
       if (config.url) provider.config.url = config.url;
       if (config.protocols) provider.config.protocols = config.protocols;
+      if (config.transport) provider.config.transport = config.transport;
 
       if (provider.config.protocols)
-        ws.baseSocket = new WebSocket(provider.config.url, provider.config.protocols);
+        ws.baseSocket = new provider.config.transport(
+          provider.config.url,
+          provider.config.protocols
+        );
       else
-        ws.baseSocket = new WebSocket(provider.config.url);
+        ws.baseSocket = new provider.config.transport(provider.config.url);
 
       ws.on('open', function () {
         // Send buffered messages.
@@ -149,6 +155,18 @@ function wsProvider() {
 
   this.setProtocols = function setEndpoint(protocols) {
     this.config.protocols = protocols;
+    return this;
+  };
+
+  /**
+   * Set a custom WebSocket transport.
+   *
+   * @param {*} transport
+   * @returns {primusProvider}
+   */
+
+  this.setTransport = function setTransport(transport) {
+    this.config.transport = transport;
     return this;
   };
 }

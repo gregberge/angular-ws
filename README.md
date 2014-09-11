@@ -45,6 +45,14 @@ Set the protocols used by the WebSocket.
 wsProvider.setProtocols(['protocol']);
 ```
 
+#### wsProvider.setTransport(transport)
+
+Set a custom transport (example: [ReconnectingWebSocket](https://github.com/joewalnes/reconnecting-websocket)).
+
+```js
+wsProvider.setTransport(ReconnectingWebSocket);
+```
+
 ### Service
 
 #### ws.connect([config])

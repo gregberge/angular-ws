@@ -31,6 +31,23 @@ describe('WebSocket', function () {
         });
       });
     });
+
+    describe('#setTransport', function () {
+      it('should define transport', function () {
+        var CustomWs = function () {};
+        CustomWs.prototype.addEventListener = function () {};
+
+        module(function (wsProvider) {
+          wsProvider.setTransport(CustomWs);
+          wsProvider.setProtocols('a');
+        });
+
+        inject(function (ws) {
+          ws.connect();
+          expect(ws.baseSocket).to.be.instanceOf(CustomWs);
+        });
+      });
+    });
   });
 
   describe('service', function () {
